@@ -4,7 +4,9 @@
 
 import Foundation
 
-enum ShellCommand {
-    case git(GitCommand)
-    case xcode
+enum PathComponent {
+    
+    case shared
+    case spm
+    case workspace
 }

@@ -5,6 +5,7 @@
 import Foundation
 
 struct PackageCheckerResult {
+    
     let level: Level
     let package: SwiftPackage
     let version: PackageVersion
@@ -14,9 +15,20 @@ struct PackageCheckerResult {
 // MARK: - PackageCheckerResult + Message
 
 extension PackageCheckerResult {
-    var message: String {
+    var message: DependencyOutput {
+        DependencyOutput(
+            level: self.level,
+            message: self.value
+        )
+    }
+}
+
+
+private extension PackageCheckerResult {
+    
+    var value: String {
         [
-            "package '\(self.package.name)'",
+            "package '\(self.package.name) (\(self.package.current.value))'",
             "got a new \(self.level.name) update.",
             "version '\(self.version.value)' is available."
         ]

@@ -7,6 +7,18 @@ import Foundation
 
 extension Container {
     
+    var configurationHelper: Factory<ConfigurationHelperRepresentable> {
+        Factory(self) {
+            ConfigurationHelper()
+        }
+    }
+    
+    var derivedDataHelper: Factory<DerivedDataHelperRepresentable> {
+        Factory(self) {
+            DerivedDataHelper()
+        }
+    }
+    
     var gitTagHelper: Factory<GitTagHelperRepresentable> {
         Factory(self) {
             GitTagHelper()
@@ -16,6 +28,18 @@ extension Container {
     var packageChecker: Factory<PackageCheckerRepresentable> {
         Factory(self) {
             PackageChecker()
+        }
+    }
+    
+    var projectHelper: Factory<ProjectHelperRepresentable> {
+        Factory(self) {
+            ProjectHelper()
+        }
+    }
+    
+    var resolvedPackages: Factory<ResolvedPackagesHelperRepresentable> {
+        Factory(self) {
+            ResolvedPackagesHelper()
         }
     }
     

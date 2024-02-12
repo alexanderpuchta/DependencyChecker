@@ -1,0 +1,12 @@
+locations:
+  - invisible
+  - visible
+  - shared
+  - workspace
+messages:
+  - major
+  - minor
+  - patch
+versions:
+  - v1
+  - v2

@@ -32,7 +32,7 @@ extension PackageChecker: PackageCheckerRepresentable {
     
     func check(package: SwiftPackage) throws -> PackageCheckerResult {
         
-        let response = try shellHelper.execute(.git(.checkTag(repository: package.url)))
+        let response = try self.shellHelper.execute(.git(.checkTag(repository: package.url)))
         
         switch response {
         case let .git(version):
@@ -41,6 +41,9 @@ extension PackageChecker: PackageCheckerRepresentable {
                 package: package,
                 version: version
             )
+            
+        case .xcode:
+            throw PackageCheckerError.invalidCommand
         }
     }
 }

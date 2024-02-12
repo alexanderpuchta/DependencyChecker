@@ -32,7 +32,7 @@ extension GitTagHelper: GitTagHelperRepresentable {
             .compactMap(\.tag)
             .map(PackageVersion.init(value:))
             .sorted(by: { lhsTag, rhsTag in
-                lhsTag.value.compare(rhsTag.value, options: .numeric) == .orderedDescending
+                lhsTag.compareable.compare(rhsTag.compareable, options: .numeric) == .orderedDescending
             })
             .first
         else {

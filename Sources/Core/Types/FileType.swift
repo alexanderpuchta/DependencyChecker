@@ -4,7 +4,8 @@
 
 import Foundation
 
-enum ShellCommand {
-    case git(GitCommand)
-    case xcode
+public enum FileType {
+    
+    case invisible
+    case visible
 }

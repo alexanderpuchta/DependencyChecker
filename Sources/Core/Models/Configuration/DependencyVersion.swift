@@ -4,7 +4,8 @@
 
 import Foundation
 
-enum ShellCommand {
-    case git(GitCommand)
-    case xcode
+enum DependencyVersion: String, Decodable {
+    
+    case v1
+    case v2
 }

@@ -13,6 +13,10 @@ struct PackageVersion {
 
 extension PackageVersion {
     
+    var compareable: String {
+        self.value.filter(Constants.numeric.contains)
+    }
+    
     var major: Int {
         self.value.major
     }
@@ -26,6 +30,12 @@ extension PackageVersion {
     }
 }
 
+
+// MARK: - Constants
+
+private extension Constants {
+    static let numeric = "0123456789."
+}
 
 // MARK: - String + Helper
 

@@ -8,6 +8,7 @@ import ShellOut
 
 enum ShellResponse {
     case git(PackageVersion)
+    case xcode
 }
 
 protocol ShellHelperRepresentable {
@@ -21,6 +22,9 @@ struct ShellHelper {
     
     @Injected(\.gitTagHelper)
     private var gitTagHelper
+    
+    @Injected(\.projectHelper)
+    private var projectHelper
 }
 
 
@@ -31,8 +35,12 @@ extension ShellHelper: ShellHelperRepresentable {
     func execute(_ command: ShellCommand) throws -> ShellResponse {
         switch command {
         case let .git(gitCommand):
-            let tag = try handleGitCommand(gitCommand)
+            let tag = try self.handleGitCommand(gitCommand)
             return .git(tag)
+            
+        case .xcode:
+            _ = try self.handleXcodeCommand()
+            return .xcode
         }
     }
 }
@@ -49,7 +57,22 @@ private extension ShellHelper {
             arguments: cmd.arguments
         )
         
-        return try gitTagHelper.latest(response)
+        return try self.gitTagHelper.latest(response)
+    }
+    
+    func handleXcodeCommand() throws {
+        
+        let projectPath = try shellOut(
+            to: [
+                Constants.pwd
+            ]
+        )
+        
+        let folders = try self.projectHelper.parse(projectPath)
+        try folders.forEach { try $0.delete() }
+        
+        try shellOut(to: Constants.xcodePackageCmd)
+        
     }
 }
 
@@ -72,4 +95,13 @@ private extension GitCommand {
     var shellPath: String {
         "git"
     }
+}
+
+
+// MARK: - Constants
+
+private extension Constants {
+    
+    static let pwd = "pwd"
+    static let xcodePackageCmd = "xcodebuild -resolvePackageDependencies"
 }
