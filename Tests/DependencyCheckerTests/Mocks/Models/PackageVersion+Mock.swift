@@ -7,11 +7,11 @@ import Foundation
 
 extension PackageVersion {
     
-    static let mock = PackageVersion(value: "1.0.0")
+    static let mock = PackageVersion(value: .versionDefaultMock)
     
-    static let majorMock = PackageVersion(value: "2.0.0")
-    static let minorMock = PackageVersion(value: "1.1.0")
-    static let patchMock = PackageVersion(value: "1.0.1")
+    static let majorMock = PackageVersion(value: .versionMajorMock)
+    static let minorMock = PackageVersion(value: .versionMinorMock)
+    static let patchMock = PackageVersion(value: .versionPatchMock)
 }
 
 
