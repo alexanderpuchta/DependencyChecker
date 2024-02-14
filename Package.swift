@@ -69,6 +69,12 @@ let package = Package(
                     package: "swift-argument-parser"
                 )
             ]
+        ),
+        .testTarget(
+            name: "DependencyCheckerTests",
+            dependencies: [
+                "Core"
+            ]
         )
     ]
 )
